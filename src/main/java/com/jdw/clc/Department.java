@@ -40,9 +40,9 @@ public class Department {
 
     // todo: find appropriate floating point type for currency, java currency.
     public double getExpenseAllocation() {
-        // todo for each *unique* manager get expense allocation
-        // non-manager employees can be ignored because their managager has their
-        // rolled up expense allocation.
+        // todo for each manager get expense allocation
+        // non-manager employees can be ignored because their manager method
+        // can roll-up the subordinate expense allocation.
         return 0.0; // fixme
     }
 }
