@@ -28,6 +28,16 @@ public class EmployeeTest {
     }
 
     @Test
+    public void testCreateEmployeeWithExpenseAllocation() {
+        // local instance to test ctor
+        Employee employee = new Employee(testRole, 1500.00);
+        Employee.EmployeeRole role = employee.getRole();
+        assertEquals(testRole, role);
+        double expAlloc = employee.getExpenseAllocation();
+        assertEquals(1500.00, expAlloc, 0.005);
+    }
+
+    @Test
     public void testGetEmployeeRole() {
         Employee.EmployeeRole role = employee.getRole();
         assertEquals(testRole, role);
