@@ -17,6 +17,7 @@ public class EmployeeFactoryTest {
         assertNotNull(manager);
         assertTrue(manager instanceof Manager);     // verifies ManagerFunctions should be available
         assertEquals(Employee.EmployeeRole.MANAGER, manager.getRole());
+        assertEquals(testDept, manager.getDepartment());
         assertEquals(300.00, manager.getExpenseAllocation(), 0.005);    // note, this may change to int to simpify.
         // todo add tests for ManagerFunctions
     }
@@ -26,6 +27,7 @@ public class EmployeeFactoryTest {
         Employee developer = EmployeeFactory.createEmployee(Employee.EmployeeRole.DEVELOPER, testDept);
         assertNotNull(developer);
         assertEquals(Employee.EmployeeRole.DEVELOPER, developer.getRole());
+        assertEquals(testDept, developer.getDepartment());
         assertEquals(1000.00, developer.getExpenseAllocation(), 0.005);    // note, this may change to int to simpify
     }
 
@@ -34,6 +36,7 @@ public class EmployeeFactoryTest {
         Employee qa_tester = EmployeeFactory.createEmployee(Employee.EmployeeRole.QA_TESTER, testDept);
         assertNotNull(qa_tester);
         assertEquals(Employee.EmployeeRole.QA_TESTER, qa_tester.getRole());
+        assertEquals(testDept, qa_tester.getDepartment());
         assertEquals(500.00, qa_tester.getExpenseAllocation(), 0.005);    // note, this may change to int to simpify
     }
 
