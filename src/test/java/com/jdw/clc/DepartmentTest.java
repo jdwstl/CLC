@@ -1,11 +1,9 @@
 package com.jdw.clc;
 
-import com.sun.tools.javac.tree.DCTree;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import com.jdw.clc.Department;
 
 import static org.junit.Assert.*;
 
@@ -28,24 +26,35 @@ public class DepartmentTest {
         testDept = null;
     }
 
-    // todo: These two could be refactored into one test, with multiple asserts.
+//    @Ignore tbd
+//    public void testDefaultCtor() {
+//        Department testDefault = new Department();
+//        String testName = testDefault.getName();
+//        assertEquals("unassigned", testName);       // code smell, uses knowledge of internal implemenatation.
+//    }
+
     @Test
-    public void testGetName() {
-        String actualName = testDept.getName();
-        assertEquals(testDeptName, actualName);
+    public void testDefaultCtor() {
+        assertNotNull(testDept);
+        assertEquals(testDeptName, testDept.getName());
     }
 
     @Test
-    public void testSetName() {
+    public void testSetAndGetName() {
         String testName = "testSoftwareEngineering";
         testDept.setName(testName);
         assertEquals(testName, testDept.getName());
     }
-}
 
-// reference:
-//    @Test(expected=IndexOutOfBoundsException.class)
-//    public void testIndexOutOfBoundsException() {
-//        ArrayList emptyList = new ArrayList();
-//        Object o = emptyList.get(0);
-//    }
+    @Test
+    public void testAddAndRemoveEmployee() {
+        // todo: introduce factory method/abstract factory here...
+        // need to be able to create an Employee and have factory set Employees' attributes,
+        // e.g, initialExpenseAllocation
+        Employee emp = new Employee(Employee.EmployeeRole.DEVELOPER);
+        assertNotNull(emp);
+        testDept.addEmployee(emp);
+        boolean removed = testDept.removeEmployee(emp);
+        assertTrue(removed);
+    }
+}

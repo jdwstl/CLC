@@ -1,19 +1,25 @@
 package com.jdw.clc;
 
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * Created by jdwilson on 8/20/15.
  */
 public class Department {
 
     private String name;
+    private Set<Employee> employees;
 
+    // todo: Does not make sense to create an unnamed department.
     private Department() {
-        // leaving this private for now, as if we create a department
-        // it should at least have a name.
+        this.name = "unassigned";
     }
 
     public Department(String name) {
         this.name = name;
+        employees = new LinkedHashSet<Employee>();
     }
 
     public String getName() {
@@ -22,5 +28,21 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+    }
+
+    public boolean removeEmployee(Employee emp) {
+        return employees.remove(emp);
+    }
+
+    // todo: find appropriate floating point type for currency, java currency.
+    public double getExpenseAllocation() {
+        // todo for each *unique* manager get expense allocation
+        // non-manager employees can be ignored because their managager has their
+        // rolled up expense allocation.
+        return 0.0; // fixme
     }
 }
