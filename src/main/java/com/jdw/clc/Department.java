@@ -1,5 +1,6 @@
 package com.jdw.clc;
 
+import com.jdw.clc.Employee;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,7 +13,7 @@ public class Department {
     private String name;
     private Set<Employee> employees;
 
-    // todo: Does not make sense to create an unnamed department.
+    // todo: review, does not make sense to create an unnamed department, but default may be needed.
     private Department() {
         this.name = "unassigned";
     }
@@ -38,11 +39,14 @@ public class Department {
         return employees.remove(emp);
     }
 
-    // todo: find appropriate floating point type for currency, java currency.
-    public double getExpenseAllocation() {
-        // todo for each manager get expense allocation
-        // non-manager employees can be ignored because their manager method
-        // can roll-up the subordinate expense allocation.
-        return 0.0; // fixme
-    }
+    // this could be done by implementing MangagerFuctions, or going through Manager and
+    // iterate through all subordinates.
+    // refactoring... tbd
+//    // todo: find appropriate floating point type for currency, java currency.
+//    public double getExpenseAllocation() {
+//        // todo for each manager get expense allocation
+//        // non-manager employees can be ignored because their manager method
+//        // can roll-up the subordinate expense allocation.
+//        return 0.0; // fixme
+//    }
 }

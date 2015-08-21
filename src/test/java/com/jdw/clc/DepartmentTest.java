@@ -12,26 +12,22 @@ import static org.junit.Assert.*;
  */
 public class DepartmentTest {
 
-    String testDeptName = "testDeptName";
+    Employee testEmployee;
     Department testDept;
+    String testDeptName = "testDeptName";
 
     @Before
     public void setUp() {
         testDept = new Department(testDeptName);
+        testEmployee = new Employee(Employee.EmployeeRole.DEVELOPER, testDept, 100.00);
     }
 
     @After
     public void tearDown() {
         // this may not be necessary with JUnit4
         testDept = null;
+        testEmployee = null;
     }
-
-//    @Ignore tbd
-//    public void testDefaultCtor() {
-//        Department testDefault = new Department();
-//        String testName = testDefault.getName();
-//        assertEquals("unassigned", testName);       // code smell, uses knowledge of internal implemenatation.
-//    }
 
     @Test
     public void testDefaultCtor() {
@@ -51,10 +47,9 @@ public class DepartmentTest {
         // todo: introduce factory method/abstract factory here...
         // need to be able to create an Employee and have factory set Employees' attributes,
         // e.g, initialExpenseAllocation
-        Employee emp = new Employee(Employee.EmployeeRole.DEVELOPER);
-        assertNotNull(emp);
-        testDept.addEmployee(emp);
-        boolean removed = testDept.removeEmployee(emp);
+        assertNotNull(testEmployee);
+        testDept.addEmployee(testEmployee);
+        boolean removed = testDept.removeEmployee(testEmployee);
         assertTrue(removed);
     }
 }

@@ -10,12 +10,12 @@ public class Manager extends Employee implements ManagerFunctions {
 
     private List<Employee> subordinates = new ArrayList<Employee>();
 
-    Manager() {
-        super(EmployeeRole.MANAGER);
-    }
+//    Manager() {
+//        super(Employee.EmployeeRole.MANAGER);
+//    }
 
-    Manager(double expenseAllocation) {
-        super(EmployeeRole.MANAGER, expenseAllocation);
+    Manager(Department department, double expenseAllocation) {
+        super(EmployeeRole.MANAGER, department, expenseAllocation);
     }
 
     public List<Employee> getSubordinates() {

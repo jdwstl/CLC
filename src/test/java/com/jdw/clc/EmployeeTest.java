@@ -12,16 +12,17 @@ public class EmployeeTest {
 
     Employee employee;
     Employee.EmployeeRole testRole = Employee.EmployeeRole.DEVELOPER;
+    Department testDept = new Department("SoftwareEngineering");
 
     @Before
     public void setUp() {
-        employee = new Employee(testRole);
+        employee = new Employee(testRole, testDept);
     }
 
     @Test
     public void testCreateEmployee() {
         // local instance
-        Employee employee = new Employee(testRole);
+        Employee employee = new Employee(testRole, testDept);
         assertNotNull("employee is null", employee);
         Employee.EmployeeRole role = employee.getRole();
         assertEquals(testRole, role);
@@ -30,7 +31,7 @@ public class EmployeeTest {
     @Test
     public void testCreateEmployeeWithExpenseAllocation() {
         // local instance to test ctor
-        Employee employee = new Employee(testRole, 1500.00);
+        Employee employee = new Employee(testRole, testDept, 1500.00);
         Employee.EmployeeRole role = employee.getRole();
         assertEquals(testRole, role);
         double expAlloc = employee.getExpenseAllocation();
