@@ -42,14 +42,14 @@ public class DepartmentTest {
         assertEquals(testName, testDept.getName());
     }
 
-    @Test
-    public void testAddAndRemoveEmployee() {
-        // todo: introduce factory method/abstract factory here...
-        // need to be able to create an Employee and have factory set Employees' attributes,
-        // e.g, initialExpenseAllocation
-        assertNotNull(testEmployee);
-        testDept.addEmployee(testEmployee);
-        boolean removed = testDept.removeEmployee(testEmployee);
-        assertTrue(removed);
-    }
+//    @Deprecated
+//    public void testAddAndRemoveEmployee() {
+//        // todo: introduce factory method/abstract factory here...
+//        // need to be able to create an Employee and have factory set Employees' attributes,
+//        // e.g, initialExpenseAllocation
+//        assertNotNull(testEmployee);
+//        testDept.addEmployee(testEmployee);
+//        boolean removed = testDept.removeEmployee(testEmployee);
+//        assertTrue(removed);
+//    }
 }

@@ -15,13 +15,37 @@ public class Manager extends Employee implements ManagerFunctions {
         super(EmployeeRole.MANAGER, department, expenseAllocation);
     }
 
+    public boolean addEmployee(Employee emp) {
+        return subordinates.add(emp);
+    }
+
+    public boolean removeEmployee(Employee emp) {
+        return subordinates.remove(emp);
+    }
+
     public List<Employee> getSubordinates() {
-        return subordinates;
+         return subordinates;
     }
 
     public double getTotalExpenseAllocation() {
-        // todo:
-        return 0;
+        double totalExpenseAllocation = 0.0;
+        for (Employee emp : subordinates) {
+            totalExpenseAllocation += emp.getExpenseAllocation();
+        }
+        // include this managers allocation in total
+        totalExpenseAllocation += this.getExpenseAllocation();
+        return totalExpenseAllocation;
     }
 
 }
+// NOTES:
+// this could be done by implementing MangagerFuctions, or going through Manager and
+// iterate through all subordinates.
+// refactoring... tbd
+//    // todo: find appropriate floating point type for currency, java currency.
+//    public double getExpenseAllocation() {
+//        // todo for each manager get expense allocation
+//        // non-manager employees can be ignored because their manager method
+//        // can roll-up the subordinate expense allocation.
+//        return 0.0; // fixme
+//    }

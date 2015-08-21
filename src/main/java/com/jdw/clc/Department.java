@@ -8,9 +8,11 @@ import java.util.Set;
 /**
  * Created by jdwilson on 8/20/15.
  */
-public class Department {
+public class Department /* implements ManagerFunctions*/ {
 
     private String name;
+
+    @Deprecated
     private Set<Employee> employees;
 
     // todo: review, does not make sense to create an unnamed department, but default may be needed.
@@ -20,7 +22,7 @@ public class Department {
 
     public Department(String name) {
         this.name = name;
-        employees = new LinkedHashSet<Employee>();
+        //employees = new LinkedHashSet<Employee>();
     }
 
     public String getName() {
@@ -31,22 +33,12 @@ public class Department {
         this.name = name;
     }
 
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-    }
-
-    public boolean removeEmployee(Employee emp) {
-        return employees.remove(emp);
-    }
-
-    // this could be done by implementing MangagerFuctions, or going through Manager and
-    // iterate through all subordinates.
-    // refactoring... tbd
-//    // todo: find appropriate floating point type for currency, java currency.
-//    public double getExpenseAllocation() {
-//        // todo for each manager get expense allocation
-//        // non-manager employees can be ignored because their manager method
-//        // can roll-up the subordinate expense allocation.
-//        return 0.0; // fixme
+//    public void addEmployee(Employee employee) {
+//        employees.add(employee);
 //    }
+//
+//    public boolean removeEmployee(Employee emp) {
+//        return employees.remove(emp);
+//    }
+
 }

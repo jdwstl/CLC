@@ -19,7 +19,7 @@ public class EmployeeFactoryTest {
         assertEquals(Employee.EmployeeRole.MANAGER, manager.getRole());
         assertEquals(testDept, manager.getDepartment());
         assertEquals(300.00, manager.getExpenseAllocation(), 0.005);    // note, this may change to int to simpify.
-        // todo add tests for ManagerFunctions
+        // todo add tests for ManagerFunctions -- see integration tests below
     }
 
     @Test
@@ -43,5 +43,44 @@ public class EmployeeFactoryTest {
     @Test(expected=EmployeeFactoryException.class)
     public void testCreateInvalidEmployee() throws EmployeeFactoryException {
         Employee invalidEmployee = EmployeeFactory.createEmployee(Employee.EmployeeRole.UNASSIGNED, testDept);
+    }
+
+    // Integration tests
+    // Test expense summary methods
+    @Test
+    public void testCreateDeptManagerAndTeam() {
+        Department softwareEngineering = new Department("SoftwareEngineering");
+        Manager softwareEngineeringManager = null;
+        Employee softwareDeveloper = null;
+        Employee softwareQATester = null;
+
+        try {
+            softwareEngineeringManager =
+                    (Manager) EmployeeFactory.createEmployee(Employee.EmployeeRole.MANAGER, softwareEngineering);
+            assertNotNull(softwareEngineeringManager);
+
+            softwareDeveloper =
+                    EmployeeFactory.createEmployee(Employee.EmployeeRole.DEVELOPER, softwareEngineering);
+            assertNotNull(softwareDeveloper);
+
+            softwareQATester =
+                    EmployeeFactory.createEmployee(Employee.EmployeeRole.QA_TESTER, softwareEngineering);
+            assertNotNull(softwareQATester);
+
+        } catch (EmployeeFactoryException exc) {
+            System.err.println("caught exception:" + exc.toString());
+        }
+
+        // assign employees to manager
+        assertTrue(softwareEngineeringManager.addEmployee(softwareDeveloper));
+        assertTrue(softwareEngineeringManager.addEmployee(softwareQATester));
+
+        // summarize this managers expense allocation
+        double expenseAllocation =
+                softwareEngineeringManager.getExpenseAllocation();
+        System.err.println("expense allocation = " + expenseAllocation);
+
+        double totalExpenseAllocation = softwareEngineeringManager.getTotalExpenseAllocation();
+        System.err.println("total expense allocation = " + totalExpenseAllocation);
     }
 }
