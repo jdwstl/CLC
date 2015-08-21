@@ -23,14 +23,29 @@ public class Manager extends Employee implements ManagerFunctions {
         return subordinates.remove(emp);
     }
 
+    // tbd
     public List<Employee> getSubordinates() {
          return subordinates;
     }
 
+    // by manager
     public double getTotalExpenseAllocation() {
         double totalExpenseAllocation = 0.0;
         for (Employee emp : subordinates) {
             totalExpenseAllocation += emp.getExpenseAllocation();
+        }
+        // include this managers allocation in total
+        totalExpenseAllocation += this.getExpenseAllocation();
+        return totalExpenseAllocation;
+    }
+
+    // by department
+    public double getTotalExpenseAllocation(Department dept) {
+        double totalExpenseAllocation = 0.0;
+        for (Employee emp : subordinates) {
+            if (emp.getDepartment().equals(dept)) {
+                totalExpenseAllocation += emp.getExpenseAllocation();
+            }
         }
         // include this managers allocation in total
         totalExpenseAllocation += this.getExpenseAllocation();

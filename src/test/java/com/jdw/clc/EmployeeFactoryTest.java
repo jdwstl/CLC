@@ -48,7 +48,7 @@ public class EmployeeFactoryTest {
     // Integration tests
     // Test expense summary methods
     @Test
-    public void testCreateDeptManagerAndTeam() {
+    public void testCreateDeptManagerAndTeamAndSummarizeExpenseAllocation() {
         Department softwareEngineering = new Department("SoftwareEngineering");
         Manager softwareEngineeringManager = null;
         Employee softwareDeveloper = null;
@@ -78,9 +78,120 @@ public class EmployeeFactoryTest {
         // summarize this managers expense allocation
         double expenseAllocation =
                 softwareEngineeringManager.getExpenseAllocation();
-        System.err.println("expense allocation = " + expenseAllocation);
+        System.err.println("manager expense allocation = " + expenseAllocation);
 
         double totalExpenseAllocation = softwareEngineeringManager.getTotalExpenseAllocation();
         System.err.println("total expense allocation = " + totalExpenseAllocation);
     }
+
+    // Deeper management and employee team
+    @Test
+    public void testCreateDeptManagerAndLargeTeamAndSummarizeExpenseAllocation() {
+        Department softwareEngineering = new Department("SoftwareEngineering");
+        Manager softwareEngineeringManager = null;
+        Manager groupManager = null;
+        Employee softwareDeveloper = null;
+        Employee softwareQATester = null;
+
+        try {
+            groupManager =
+                    (Manager) EmployeeFactory.createEmployee(Employee.EmployeeRole.MANAGER, softwareEngineering);
+            assertNotNull(groupManager);
+
+            softwareEngineeringManager =
+                    (Manager) EmployeeFactory.createEmployee(Employee.EmployeeRole.MANAGER, softwareEngineering);
+            assertNotNull(softwareEngineeringManager);
+
+            softwareDeveloper =
+                    EmployeeFactory.createEmployee(Employee.EmployeeRole.DEVELOPER, softwareEngineering);
+            assertNotNull(softwareDeveloper);
+
+            softwareQATester =
+                    EmployeeFactory.createEmployee(Employee.EmployeeRole.QA_TESTER, softwareEngineering);
+            assertNotNull(softwareQATester);
+
+        } catch (EmployeeFactoryException exc) {
+            System.err.println("caught exception:" + exc.toString());
+        }
+
+        // assign employees to manager
+        assertTrue(groupManager.addEmployee(softwareEngineeringManager));
+        assertTrue(groupManager.addEmployee(softwareDeveloper));
+        assertTrue(groupManager.addEmployee(softwareQATester));
+
+        // summarize this managers expense allocation
+        double expenseAllocation =
+                groupManager.getExpenseAllocation();
+        System.err.println("manager expense allocation = " + expenseAllocation);
+        assertEquals(300.00, expenseAllocation, 0.005);
+
+        double totalExpenseAllocation =
+                groupManager.getTotalExpenseAllocation();
+        System.err.println("total expense allocation = " + totalExpenseAllocation);
+        assertEquals(2100.00, totalExpenseAllocation, 0.005);
+    }
+
+    @Test
+    public void testDepartmentExpenseAllocation() {
+        // todo
+        // reusing above, but create two different depts
+        Department softwareEngineering = new Department("SoftwareEngineering");
+        Department qualityAssurance = new Department("QualityAssurance");
+        Manager softwareEngineeringManager = null;
+        Manager groupManager = null;
+        Employee softwareDeveloper = null;
+        Employee softwareQATester = null;
+
+        try {
+            groupManager =
+                    (Manager) EmployeeFactory.createEmployee(Employee.EmployeeRole.MANAGER, qualityAssurance);
+            assertNotNull(groupManager);
+
+            softwareEngineeringManager =
+                    (Manager) EmployeeFactory.createEmployee(Employee.EmployeeRole.MANAGER, softwareEngineering);
+            assertNotNull(softwareEngineeringManager);
+
+            softwareDeveloper =
+                    EmployeeFactory.createEmployee(Employee.EmployeeRole.DEVELOPER, softwareEngineering);
+            assertNotNull(softwareDeveloper);
+
+            // this guy goes into QA dept
+            softwareQATester =
+                    EmployeeFactory.createEmployee(Employee.EmployeeRole.QA_TESTER, qualityAssurance);
+            assertNotNull(softwareQATester);
+
+        } catch (EmployeeFactoryException exc) {
+            System.err.println("caught exception:" + exc.toString());
+        }
+
+        // assign employees to manager
+        assertTrue(groupManager.addEmployee(softwareEngineeringManager));
+        assertTrue(groupManager.addEmployee(softwareDeveloper));
+        assertTrue(groupManager.addEmployee(softwareQATester));
+
+        // summarize this managers expense allocation
+        double expenseAllocation =
+                groupManager.getExpenseAllocation();
+        System.err.println("manager expense allocation = " + expenseAllocation);
+        assertEquals(300.00, expenseAllocation, 0.005);
+
+        double totalExpenseAllocation =
+                groupManager.getTotalExpenseAllocation();
+        System.err.println("total expense allocation = " + totalExpenseAllocation);
+        assertEquals(2100.00, totalExpenseAllocation, 0.005);
+
+        // by dept, sw
+        double totalSoftwareEngineeringExpenseAllocation =
+                groupManager.getTotalExpenseAllocation(softwareEngineering);
+        System.err.println("total SW dept expense allocation = " + totalSoftwareEngineeringExpenseAllocation);
+        assertEquals(1600.00, totalSoftwareEngineeringExpenseAllocation, 0.005);
+
+        // by dept QA
+        double totalQAExpenseAllocation =
+                groupManager.getTotalExpenseAllocation(qualityAssurance);
+        System.err.println("total QA dept expense allocation = " + totalQAExpenseAllocation);
+        assertEquals(800.00, totalQAExpenseAllocation, 0.005);
+    }
+
+
 }

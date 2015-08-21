@@ -13,4 +13,8 @@ public interface ManagerFunctions {
 
     double getTotalExpenseAllocation();
 
+    // this is not ideal... should be refactored into Department class
+    // refactoring EmployeeFactory too.
+    double getTotalExpenseAllocation(Department dept);
+
 }

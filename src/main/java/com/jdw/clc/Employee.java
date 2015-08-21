@@ -16,6 +16,7 @@ public class Employee {
         QA_TESTER
     }
 
+    private int employeeID;     // may be required to distinguish employee in dept.
     private EmployeeRole role;
     private Department department;
 
