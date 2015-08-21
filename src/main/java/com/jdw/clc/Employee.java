@@ -16,6 +16,9 @@ public class Employee {
     }
 
     private EmployeeRole role;
+    // todo: review, consider using BigDecimal or java.util.Currency
+    // or we could use int here and just assume whole dollar amounts for this case.
+    private double expenseAllocation = 0.00;
 
     private Employee() {
         // todo: review
@@ -36,4 +39,11 @@ public class Employee {
         this.role = role;
     }
 
+    public double getExpenseAllocation() {
+        return this.expenseAllocation;
+    }
+
+    public void setExpenseAllocation(double expenseAllocation) {
+        this.expenseAllocation = expenseAllocation;
+    }
 }

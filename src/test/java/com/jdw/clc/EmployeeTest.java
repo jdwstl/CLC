@@ -41,4 +41,18 @@ public class EmployeeTest {
         Employee.EmployeeRole role = employee.getRole();
         assertEquals(Employee.EmployeeRole.MANAGER, role);
     }
+
+    @Test
+    public void testDefaultExpenseAllocation() {
+        double expAlloc = employee.getExpenseAllocation();
+        assertEquals(0.00, expAlloc, 0.005); // experimenting with this right now, 3rd param is epsilon
+    }
+
+    @Test
+    public void testSetAndGetExpenseAllocation() {
+        employee.setExpenseAllocation(1500.000);
+        double expAlloc = employee.getExpenseAllocation();
+        assertEquals(1500.00, expAlloc, 0.005);
+        System.err.println("expAlloc= " + expAlloc);  // testing output for rounding, display
+    }
 }
