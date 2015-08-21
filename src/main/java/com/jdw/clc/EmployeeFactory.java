@@ -5,8 +5,19 @@ package com.jdw.clc;
  * Responsible for creating instances of Employees
  */
 
-public interface EmployeeFactory {
-//    public EmployeeFactory(Employee.EmployeeRole role);
+public class EmployeeFactory {
+
+    Employee employee = new Employee(Employee.EmployeeRole.UNASSIGNED);
+
+//    private EmployeeFactory() {
+//        // tbd
+//    }
 //
-//    public createEmployee(Employee.EmployeeRole role);
+//    public static EmployeeFactory getInstance() {
+//        return new EmployeeFactory();
+//    }
+
+    public static Employee createEmployee(Employee.EmployeeRole role) {
+        return Employee(role);
+    }
 }
