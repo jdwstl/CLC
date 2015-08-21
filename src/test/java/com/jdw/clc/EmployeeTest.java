@@ -20,16 +20,25 @@ public class EmployeeTest {
 
     @Test
     public void testCreateEmployee() {
-        Employee employee = new Employee(Employee.EmployeeRole.DEVELOPER);
+        // local instance
+        Employee employee = new Employee(testRole);
         assertNotNull("employee is null", employee);
         Employee.EmployeeRole role = employee.getRole();
-        assertEquals(Employee.EmployeeRole.DEVELOPER, role);
+        assertEquals(testRole, role);
     }
 
     @Test
     public void testGetEmployeeRole() {
         Employee.EmployeeRole role = employee.getRole();
-        assertEquals(testRole, role);       // actual test
+        assertEquals(testRole, role);
         System.err.println("testRole= " + testRole.toString());     // testing enum toString(), should print DEVELOPER
+    }
+
+    @Test
+    public void testSetAndGetEmployeeRole() {
+        // resets test case employee object
+        employee.setRole(Employee.EmployeeRole.MANAGER);
+        Employee.EmployeeRole role = employee.getRole();
+        assertEquals(Employee.EmployeeRole.MANAGER, role);
     }
 }
