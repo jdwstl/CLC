@@ -25,14 +25,13 @@ public class Employee {
 
     protected Employee(EmployeeRole role) {
         // todo: review
-        // Does not make sense to instantiate an employee without a role.
-        // Does not make sense to create an empty Employee either with UNASSIGNED role?
+        // Does not make sense to instantiate an employee without a dept or initial expense allocation.
+        // Does it make sense to create an empty Employee with an UNASSIGNED role?
         this.role = role;
         this.department = new Department("unassigned");
         // this.expenseAllocation set by declaration
     }
 
-    // todo determine if this constructor is practical, coupling, cohesion
     public Employee(EmployeeRole role, Department department) {
         this.role = role;
         this.department = department;

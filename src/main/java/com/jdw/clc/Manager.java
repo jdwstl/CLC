@@ -8,11 +8,8 @@ import java.util.List;
  */
 public class Manager extends Employee implements ManagerFunctions {
 
+    // todo: ArrayList or Set/LinkedHashSet?  No dupes.
     private List<Employee> subordinates = new ArrayList<Employee>();
-
-//    Manager() {
-//        super(Employee.EmployeeRole.MANAGER);
-//    }
 
     Manager(Department department, double expenseAllocation) {
         super(EmployeeRole.MANAGER, department, expenseAllocation);
@@ -21,4 +18,10 @@ public class Manager extends Employee implements ManagerFunctions {
     public List<Employee> getSubordinates() {
         return subordinates;
     }
+
+    public double getTotalExpenseAllocation() {
+        // todo:
+        return 0;
+    }
+
 }
