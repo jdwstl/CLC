@@ -3,12 +3,10 @@ package com.jdw.clc;
 /**
  * Created by jdwilson on 8/20/15.
  * Responsible for creating instances of Employees
+ * Manager is a concrete class as it has additional methods.
  */
 
 public class EmployeeFactory {
-
-    // tbd this may not be needed...
-    Employee employee = new Employee(Employee.EmployeeRole.UNASSIGNED);
 
     private static final double initialManagerExpenseAllocation = 300.00;
     private static final double initialDeveloperExpenseAllocation = 1000.00;
