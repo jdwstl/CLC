@@ -1,9 +1,3 @@
 # IntelliJ initial configuration
 target/
 .idea/
-
-# Packages
-*.jar
-*.war
-*.ear
-
