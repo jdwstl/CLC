@@ -28,6 +28,7 @@ public class DepartmentTest {
         testDept = null;
     }
 
+    // todo: These two could be refactored into one test, with multiple asserts.
     @Test
     public void testGetName() {
         String actualName = testDept.getName();
