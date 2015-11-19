@@ -15,6 +15,7 @@ public interface ManagerFunctions {
 
     // this is not ideal... should be refactored into Department class
     // refactoring EmployeeFactory too.
+    // Violates? single responsibiltiy prin.
     double getTotalExpenseAllocation(Department dept);
 
 }
