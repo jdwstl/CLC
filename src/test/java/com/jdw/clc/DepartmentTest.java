@@ -42,6 +42,22 @@ public class DepartmentTest {
         assertEquals(testName, testDept.getName());
     }
 
+    @Test
+    public void testDisplayJavaClasspath() {
+        // get java properties -- demo
+        //System.out.println("java.class.path=" + System.getProperty("java.class.path"));
+        String classpath = System.getProperty("java.class.path");
+        System.out.println(classpath);
+
+        String[] parts = classpath.split(":");
+        StringBuilder sb = new StringBuilder();
+        for (String part : parts) {
+            sb.append(part).append('\n');
+        }
+
+        System.out.print("classpath-elements:\n" + sb.toString());
+    }
+
 //    @Deprecated
 //    public void testAddAndRemoveEmployee() {
 //        // todo: introduce factory method/abstract factory here...
